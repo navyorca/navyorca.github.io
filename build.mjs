@@ -87,11 +87,11 @@ for (const liker of likers) {
 }
 const items = [...known.values()].sort((a, b) => b.at.localeCompare(a.at)).slice(0, KEEP);
 await writeFile(STATE, JSON.stringify({ items }, null, 2));
-await write('xrpc/app.bsky.feed.getFeedSkeleton', JSON.stringify({
+await write('xrpc/app.bsky.feed.getFeedSkeleton/index.json', JSON.stringify({
   feed: items.slice(0, 100).map((i) => ({ post: i.post })),
 }));
 if (FEED_URI) {
-  await write('xrpc/app.bsky.feed.describeFeedGenerator', JSON.stringify({
+  await write('xrpc/app.bsky.feed.describeFeedGenerator/index.json', JSON.stringify({
     did: FEED_URI.split('/')[2], feeds: [{ uri: FEED_URI }],
   }));
 }
